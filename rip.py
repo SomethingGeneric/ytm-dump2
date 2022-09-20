@@ -13,6 +13,15 @@ ydl_opts = {
     }],
 }
 
+def check_song(title, id):
+    files = os.listdir()
+    found = False
+    for file in files:
+        if title in file and id in file:
+            found = True
+    return found
+
+
 if not os.path.exists('headers_auth.json'):
     print("please run the setup")
     sys.exit(1)
@@ -41,12 +50,13 @@ for pl_id in pl_ids:
         vid = track['videoId']
         print(f"Downloading {vid}")
         url = f"https://music.youtube.com/watch?v={vid}"
-        try:
-            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url])
-        except Exception as e:
-            print(f"Failed to download {url}: {str(e)}")
-            failed.append(url)
+        if not check_song(t_title, vid):
+            try:
+                with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                    ydl.download([url])
+            except Exception as e:
+                print(f"Failed to download {url}: {str(e)}")
+                failed.append(url)
     os.chdir("../")
 
 with open("failed.txt", "w") as f:
