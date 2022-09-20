@@ -35,7 +35,8 @@ pl_ids = []
 failed = []
 
 for playlist in playlists:
-    pl_ids.append(playlist['playlistId'])
+    if "likes" not in playlist['title'].lower():
+        pl_ids.append(playlist['playlistId'])
 
 for pl_id in pl_ids:
     data = ytmusic.get_playlist(pl_id)
