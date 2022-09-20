@@ -38,7 +38,7 @@ for pl_id in pl_ids:
         url = f"https://www.youtube.com/watch?v={vid}"
         if not check_song(t_title, vid):
             print("Didn't find file, downloading.")
-            os.system(f"youtube-dl {url}")
+            os.system(f"youtube-dl -x --audio-format mp3 {url}")
         else:
             print("Not downloading.")
     os.chdir("../")
