@@ -2,13 +2,16 @@ import os,sys
 
 from ytmusicapi import YTMusic
 
-def check_song(title, id):
-    files = os.listdir()
-    found = False
-    for file in files:
-        if title in file and id in file:
-            found = True
-    return found
+import youtube_dl
+
+ydl_opts = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '192',
+    }],
+}
 
 if not os.path.exists('headers_auth.json'):
     print("please run the setup")
@@ -35,10 +38,7 @@ for pl_id in pl_ids:
         t_title = track['title']
         vid = track['videoId']
         print(f"Downloading {vid}")
-        url = f"https://www.youtube.com/watch?v={vid}"
-        if not check_song(t_title, vid):
-            print("Didn't find file, downloading.")
-            os.system(f"youtube-dl -x --audio-format mp3 {url}")
-        else:
-            print("Not downloading.")
+        url = f"https://music.youtube.com/watch?v={vid}"
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
     os.chdir("../")
