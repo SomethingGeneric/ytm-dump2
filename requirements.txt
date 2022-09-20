@@ -1,0 +1,4 @@
+ytmusicapi
+youtube-dl
+ipython
+black
