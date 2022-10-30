@@ -51,6 +51,8 @@ for pl_id in pl_ids:
     for track in tracks:
         t_title = track['title']
         vid = track['videoId']
+        if t_title is None or vid is None:
+            pass
         print(f"Downloading {vid}")
         url = f"https://music.youtube.com/watch?v={vid}"
         if not check_song(t_title, vid):
