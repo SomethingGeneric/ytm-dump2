@@ -17,7 +17,7 @@ def check_song(title, id):
     files = os.listdir()
     found = False
     for file in files:
-        if title in file and id in file:
+        if title in file or id in file:
             found = True
     return found
 
