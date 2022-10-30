@@ -2,3 +2,4 @@ ytmusicapi
 youtube-dl
 ipython
 black
+pysubsonic
