@@ -48,10 +48,19 @@ for playlist in playlists:
 for pl_id in pl_ids:
     data = ytmusic.get_playlist(pl_id)
     pl_name = data['title']
-
-    n_plid = p.parse_playlist_id(p.create_playlist(name=pl_name))
+    print("Working on " + pl_name)
 
     all_tracks = data['tracks']
+
+    pl_id = p.parse_playlist_id(p.create_playlist(name=pl_name))
+
     for track in all_tracks:
-        song_id = p.get_song_ids(track['title'])[0]
-        p.create_playlist(id=n_plid, songid=song_id)
+        songs = p.get_song_ids(track['title'])
+        if len(songs) != 0:
+            song_id = songs[0]
+            p.update_playlist(pl_id, song_id)
+            print("Added " + track['title'])
+        else:
+            print("Failed to add " + track['title'])
+
+    print("---------------------------------------------------")
