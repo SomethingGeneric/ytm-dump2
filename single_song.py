@@ -10,4 +10,4 @@ ydl_opts = {
 }
 
 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-    ydl.download(input("URL: "))
+    ydl.download([input("URL: ")])
