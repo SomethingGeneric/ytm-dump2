@@ -55,6 +55,7 @@ for pl_id in pl_ids:
     pl_id = p.parse_playlist_id(p.create_playlist(name=pl_name))
 
     for track in all_tracks:
+        print(f"Working on {track['title']}")
         songs = p.get_song_ids(track['title'])
         if len(songs) != 0:
             song_id = songs[0]
