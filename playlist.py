@@ -61,7 +61,7 @@ for pl_id in pl_ids:
         songs = p.get_song_ids(track['title'])
         if len(songs) != 0:
             song_id = songs[0]
-            p.update_playlist(pl_id, song_id)
+            p.create_playlist(id=pl_id, songid=song_id)
             print("Added " + track['title'])
         else:
             print("Failed to add " + track['title'])
