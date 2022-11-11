@@ -52,7 +52,9 @@ for pl_id in pl_ids:
 
     all_tracks = data['tracks']
 
-    pl_id = p.parse_playlist_id(p.create_playlist(name=pl_name))
+    e_plid = p.get_playlist_id_by_name(pl_name)
+
+    pl_id = p.parse_playlist_id(p.create_playlist(name=pl_name)) if e_plid is None else e_plid
 
     for track in all_tracks:
         print(f"Working on {track['title']}")
